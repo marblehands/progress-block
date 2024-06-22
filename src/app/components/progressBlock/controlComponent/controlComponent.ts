@@ -6,6 +6,7 @@ const OPTIONS = {
   valueInput: {
     label: 'Value',
     id: 'value',
+    value: 100,
   },
   animateToggle: {
     label: 'Animate',
@@ -21,8 +22,10 @@ export default class ControlComponent extends BaseComponent<'div'> {
   constructor(
     private input: BaseComponent<'input'>,
     private label: BaseComponent<'label'>,
+    public value: number,
   ) {
     super({ tag: 'div', classes: [styles.inputGroup] });
+    this.value = +input.element.value || 0;
     this.render();
   }
 
