@@ -35,5 +35,8 @@
     "stylelint-prettier": "^5.0.0",
     "typescript": "^5.2.2",
     "vite": "^5.3.1"
+  },
+  "dependencies": {
+    "normalize-scss": "^8.0.0"
   }
 }
