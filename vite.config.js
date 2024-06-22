@@ -3,7 +3,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import autoprefixer from 'autoprefixer';
 
 export default defineConfig({
-  base: '/progress-block/',
+  base: '',
   plugins: [tsconfigPaths()],
   css: {
     modules: {

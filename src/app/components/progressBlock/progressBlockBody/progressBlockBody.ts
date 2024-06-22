@@ -1,6 +1,6 @@
 import BaseComponent from '@components/baseComponent/baseComponent';
 import styles from './_progressBlockBody.module.scss';
-import ControlPanelComponent, { controlPanel } from './controlPanel/controlPanel';
+import ControlPanelComponent, { ControlPanel } from '../controlPanel/controlPanel';
 
 export default class ProgressBlockBodyComponent extends BaseComponent<'main'> {
   constructor(private controlPanel: ControlPanelComponent) {
@@ -13,4 +13,4 @@ export default class ProgressBlockBodyComponent extends BaseComponent<'main'> {
   }
 }
 
-export const ProgressBlockBody = (): ProgressBlockBodyComponent => new ProgressBlockBodyComponent(controlPanel());
+export const ProgressBlockBody = (): ProgressBlockBodyComponent => new ProgressBlockBodyComponent(ControlPanel());

@@ -1,4 +1,4 @@
-import BaseComponent from '../baseComponent/baseComponent';
+import BaseComponent from './baseComponent/baseComponent';
 
 export const div = (classes?: string[], content?: string): BaseComponent<'div'> =>
   new BaseComponent({ tag: 'div', classes, content });

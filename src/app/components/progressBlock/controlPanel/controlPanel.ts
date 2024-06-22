@@ -1,6 +1,6 @@
-import BaseComponent from '@app/components/baseComponent/baseComponent';
+import BaseComponent from '@components/baseComponent/baseComponent';
+import ControlComponent, { valueControl, animateControl, hideControl } from '../controlComponent/controlComponent';
 import styles from './_controlPanel.module.scss';
-import ControlComponent, { valueControl, animateControl, hideControl } from './valueControl/valueControl';
 
 export default class ControlPanelComponent extends BaseComponent<'section'> {
   constructor(
@@ -17,5 +17,5 @@ export default class ControlPanelComponent extends BaseComponent<'section'> {
   }
 }
 
-export const controlPanel = (): ControlPanelComponent =>
+export const ControlPanel = (): ControlPanelComponent =>
   new ControlPanelComponent(valueControl, animateControl, hideControl);
