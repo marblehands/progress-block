@@ -3,10 +3,22 @@ import styles from './_valueControl.module.scss';
 import BaseComponent from '@app/components/baseComponent/baseComponent';
 import { input, label } from '@app/components/tags/tags';
 
-const VALUE_LABEL_CONTENT = 'Value';
-const VALUE_ID = 'value';
+const OPTIONS = {
+  valueInput: {
+    label: 'Value',
+    id: 'value',
+  },
+  animateToggle: {
+    label: 'Animate',
+    id: 'animate',
+  },
+  hideToggle: {
+    label: 'Hide',
+    id: 'hide',
+  },
+};
 
-export default class ValueControl extends BaseComponent<'div'> {
+export default class ControlComponent extends BaseComponent<'div'> {
   constructor(
     private input: BaseComponent<'input'>,
     private label: BaseComponent<'label'>,
@@ -20,6 +32,15 @@ export default class ValueControl extends BaseComponent<'div'> {
   }
 }
 
-const inputControl = input(['input'], { id: VALUE_ID });
-const inputLabel = label(['label'], VALUE_LABEL_CONTENT, { for: VALUE_ID });
-export const valueControl = new ValueControl(inputControl, inputLabel);
+const valueInput = input(['input'], { type: 'text', id: OPTIONS.valueInput.id });
+const valueInputLabel = label(['label'], OPTIONS.valueInput.label, { for: OPTIONS.valueInput.id });
+
+const animateToggle = input(['input'], { type: 'checkbox', id: OPTIONS.animateToggle.id });
+const animateToggleLabel = label(['label'], OPTIONS.animateToggle.label, { for: OPTIONS.animateToggle.id });
+
+const hideToggle = input(['input'], { type: 'checkbox', id: OPTIONS.hideToggle.id });
+const hideToggleLabel = label(['label'], OPTIONS.hideToggle.label, { for: OPTIONS.hideToggle.id });
+
+export const valueControl = new ControlComponent(valueInput, valueInputLabel);
+export const animateControl = new ControlComponent(animateToggle, animateToggleLabel);
+export const hideControl = new ControlComponent(hideToggle, hideToggleLabel);
