@@ -1,6 +1,4 @@
-import Canvas from '../canvasComponent/canvasComponent';
-
-export class ProgressCircleComponent {
+export class DrawCircleService {
   private lineWidth: number;
   private startAngle: number;
   private color: string;
