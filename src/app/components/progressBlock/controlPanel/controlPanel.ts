@@ -21,7 +21,12 @@ export default class ControlPanelComponent extends BaseComponent<'section'> {
       this.valueControlOnChange,
     );
     this.animateControl = createControlComponent({ label: 'Animate', id: 'animate' }, 'checkbox');
-    this.hideControl = createControlComponent({ label: 'Hide', id: 'hide' }, 'checkbox');
+    this.hideControl = createControlComponent(
+      { label: 'Hide', id: 'hide' },
+      'checkbox',
+      undefined,
+      this.hideControlOnChange,
+    );
     this.renderCircle();
     this.renderComponent();
   }
@@ -45,6 +50,18 @@ export default class ControlPanelComponent extends BaseComponent<'section'> {
     this.value = newValue;
     this.renderCircle();
   };
+
+  private hideControlOnChange = (isChecked: boolean) => {
+    this.hide(isChecked);
+  };
+
+  private hide(isChecked: boolean): void {
+    if (isChecked) {
+      this.addStyles(['hide']);
+    } else {
+      this.removeStyles(['hide']);
+    }
+  }
 }
 
 export const ControlPanel = (): ControlPanelComponent => new ControlPanelComponent(Canvas);
