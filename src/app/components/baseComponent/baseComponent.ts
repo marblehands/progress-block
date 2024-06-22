@@ -1,4 +1,4 @@
-interface BaseComponentParams<T> {
+export interface BaseComponentParams<T> {
   tag: T;
   classes?: string[];
   content?: string;

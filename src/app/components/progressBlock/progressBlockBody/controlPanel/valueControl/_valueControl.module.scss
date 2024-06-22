@@ -1,1 +1,5 @@
-/* styles for input */
+.input-group {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 22px;
+}
