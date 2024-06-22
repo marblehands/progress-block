@@ -1,1 +1,2 @@
-// import and create App
+import './styles/global.scss';
+import './app/app';

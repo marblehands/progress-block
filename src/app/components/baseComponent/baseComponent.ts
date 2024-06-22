@@ -32,6 +32,10 @@ export default class BaseComponent<T extends keyof HTMLElementTagNameMap> {
     }
   }
 
+  public getElement(): HTMLElementTagNameMap[T] {
+    return this.element;
+  }
+
   public addStyles(classes: string[]): void {
     this.element.classList.add(...classes);
   }
