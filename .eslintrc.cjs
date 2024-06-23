@@ -8,10 +8,10 @@ module.exports = {
     'prettier',
   ],
   parser: '@typescript-eslint/parser',
-  sourceType: 'module',
   parserOptions: {
     project: true,
     tsconfigRootDir: __dirname,
+    sourceType: 'module',
   },
   plugins: ['@typescript-eslint', '@stylistic/ts', 'import'],
   root: true,
