@@ -1,34 +1,33 @@
 import BaseComponent from '@components/baseComponent/baseComponent';
 import { div, h1, input, label } from '@components/tags';
-import { ProgressBlockModel } from '../progressBlockModel/progressBlockModel';
 import { ProgressCircle } from '../progressCircle/progressCircle';
 import { AnimationService } from '../services/animationService';
 import Canvas from '../canvasComponent/canvasComponent';
 
-const PROGRESS_BLOCK_OPTIONS = {
-  header: {
-    h1: 'Progress',
-  },
-  valueInput: {
-    label: 'Value',
-    attributes: {
-      type: 'text',
-      id: 'value',
-    },
-  },
-  animateToggle: {
-    label: 'Animate',
-    attributes: {
-      id: 'animate',
-    },
-  },
-  hideToggle: {
-    label: 'Hide',
-    attributes: {
-      id: 'hide',
-    },
-  },
-};
+// const PROGRESS_BLOCK_OPTIONS = {
+//   header: {
+//     h1: 'Progress',
+//   },
+//   valueInput: {
+//     label: 'Value',
+//     attributes: {
+//       type: 'text',
+//       id: 'value',
+//     },
+//   },
+//   animateToggle: {
+//     label: 'Animate',
+//     attributes: {
+//       id: 'animate',
+//     },
+//   },
+//   hideToggle: {
+//     label: 'Hide',
+//     attributes: {
+//       id: 'hide',
+//     },
+//   },
+// };
 
 export class ProgressBlockView extends BaseComponent<'section'> {
   private valueInput: BaseComponent<'input'>;
@@ -82,5 +81,5 @@ export class ProgressBlockView extends BaseComponent<'section'> {
     return wrapper;
   }
 
-  update({ value, isAnimated, isHidden }: ProgressBlockModel): void {}
+  // update({ value, isAnimated, isHidden }: ProgressBlockModel): void {}
 }
