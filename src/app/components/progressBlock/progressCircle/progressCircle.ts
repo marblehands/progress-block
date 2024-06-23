@@ -16,7 +16,7 @@ export class ProgressCircle {
     this.draw();
   }
 
-  private draw() {
+  draw() {
     this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
 
     this.context.beginPath();
@@ -37,6 +37,14 @@ export class ProgressCircle {
   update(step: number) {
     this.startAngle = this.startAngle + Math.PI * 2 * step;
     this.endAngle = this.endAngle + Math.PI * 2 * step;
+    this.draw();
+  }
+
+  updateArcWIdth(value: number) {
+    const currentArcWidth = this.endAngle - this.startAngle;
+    const diff = value - currentArcWidth;
+    this.endAngle += diff;
+    console.log(value);
     this.draw();
   }
 }

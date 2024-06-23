@@ -8,11 +8,11 @@ import { Animation } from '../progressCircle/animationService';
 
 export default class ControlPanelComponent extends BaseComponent<'section'> {
   private value: number;
-
   private circle!: ProgressCircle;
   private valueControl: ControlComponent;
   private animateControl: ControlComponent;
   private hideControl: ControlComponent;
+  private animation!: Animation;
 
   constructor(private canvas: CanvasComponent) {
     super({ tag: 'section', classes: [styles.controlPanel] });
@@ -35,17 +35,23 @@ export default class ControlPanelComponent extends BaseComponent<'section'> {
       undefined,
       this.hideControlOnChange,
     );
-    this.renderCircle();
     this.renderComponent();
   }
 
   private renderCircle(): void {
     const angleRadians = (this.value / 100) * 2 * Math.PI - Math.PI / 2;
-    console.log(this.value);
     this.circle = new ProgressCircle(Canvas.getContext(), 60, 60, 50, angleRadians);
+    this.animation = new Animation(this.circle, 0.01);
+  }
+
+  private updateCircle(): void {
+    const angleRadians = (this.value / 100) * 2 * Math.PI;
+    console.log(this.value);
+    this.circle.updateArcWIdth(angleRadians);
   }
 
   private renderComponent(): void {
+    this.renderCircle();
     this.append([
       this.canvas.getElement(),
       this.valueControl.getElement(),
@@ -56,7 +62,7 @@ export default class ControlPanelComponent extends BaseComponent<'section'> {
 
   private valueControlOnChange = (newValue: number) => {
     this.value = newValue;
-    this.renderCircle();
+    this.updateCircle();
   };
 
   private hideControlOnChange = (isChecked: boolean) => {
@@ -76,9 +82,10 @@ export default class ControlPanelComponent extends BaseComponent<'section'> {
   }
 
   private animate(isChecked: boolean): void {
-    const animation = new Animation(this.circle, 0.01);
     if (isChecked) {
-      animation.start();
+      this.animation.start();
+    } else {
+      this.animation.stop();
     }
   }
 }
