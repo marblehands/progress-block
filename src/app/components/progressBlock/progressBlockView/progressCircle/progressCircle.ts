@@ -44,7 +44,6 @@ export class ProgressCircle {
     const currentArcWidth = this.endAngle - this.startAngle;
     const diff = value - currentArcWidth;
     this.endAngle += diff;
-    console.log(value);
     this.draw();
   }
 }
