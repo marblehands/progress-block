@@ -1,9 +1,9 @@
 import styles from './_progressBlockView.module.scss';
 import BaseComponent from '@components/baseComponent/baseComponent';
 import { div, h1, input, label } from '@components/tags';
-import { ProgressCircle } from '../progressCircle/progressCircle';
+import { ProgressCircle } from './progressCircle/progressCircle';
 import { AnimationService } from '../services/animationService';
-import Canvas from '../canvasComponent/canvasComponent';
+import Canvas from './canvasComponent/canvasComponent';
 
 export class ProgressBlockView extends BaseComponent<'section'> {
   private valueInput: BaseComponent<'input'>;

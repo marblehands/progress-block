@@ -1,22 +1,19 @@
-import styles from './_progressBlock.module.scss';
+import { ProgressBlockController } from './progressBlockController/progressBlockController';
+import { ProgressBlockModel } from './progressBlockModel/progressBlockModel';
+import { ProgressBlockView } from './progressBlockView/progressBlockView';
 
-import BaseComponent from '../baseComponent/baseComponent';
-import { ProgressBlockHeader } from './progressBlockHeader/header';
-import { ProgressBlockBody } from './progressBlockBody/progressBlockBody';
+export function createProgressBlock() {
+  const model = new ProgressBlockModel();
+  const view = new ProgressBlockView(model.getValue());
+  const controller = new ProgressBlockController(model, view);
 
-class ProgressBlockComponent extends BaseComponent<'div'> {
-  constructor(
-    private header: BaseComponent<'header'>,
-    private body: BaseComponent<'main'>,
-  ) {
-    super({ tag: 'div', classes: [styles.progressBlock] });
-    this.render();
-  }
-
-  private render(): void {
-    this.append([this.header.getElement(), this.body.getElement()]);
-  }
+  return {
+    element: view.getElement(),
+    setValue: (value: number) => controller.setValue(value),
+    setIsAnimated: (isAnimated: boolean) => controller.setIsAnimated(isAnimated),
+    setIsHidden: (isHidden: boolean) => controller.setIsHidden(isHidden),
+  };
 }
 
-export const ProgressBlock = (): ProgressBlockComponent =>
-  new ProgressBlockComponent(ProgressBlockHeader(), ProgressBlockBody());
+const progressBlock = createProgressBlock();
+export default progressBlock;

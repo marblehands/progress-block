@@ -15,7 +15,7 @@ export class ProgressBlockController {
 
   private valueInputOnChange(value: string): void {
     const numValue = Number(value);
-    if (!Number.isNaN(numValue) && numValue >= 0 && numValue <= 100) {
+    if (value.trim() && !Number.isNaN(numValue) && numValue >= 0 && numValue <= 100) {
       this.setValue(numValue);
     }
   }

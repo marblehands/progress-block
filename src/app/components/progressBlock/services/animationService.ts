@@ -1,4 +1,4 @@
-import { ProgressCircle } from '../progressCircle/progressCircle';
+import { ProgressCircle } from '../progressBlockView/progressCircle/progressCircle';
 
 export class AnimationService {
   private circle: ProgressCircle;
