@@ -1,6 +1,6 @@
-import { ProgressCircle } from './progressCircle';
+import { ProgressCircle } from '../progressCircle/progressCircle';
 
-export class Animation {
+export class AnimationService {
   private circle: ProgressCircle;
   private speed: number;
   private animationId: number | null;

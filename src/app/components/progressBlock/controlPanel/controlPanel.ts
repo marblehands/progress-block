@@ -4,7 +4,7 @@ import styles from './_controlPanel.module.scss';
 import Canvas, { CanvasComponent } from '../canvasComponent/canvasComponent';
 import { ProgressCircle } from '../progressCircle/progressCircle';
 import { createControlComponent } from '@utils/utils';
-import { Animation } from '../progressCircle/animationService';
+import { AnimationService } from '../services/animationService';
 
 export default class ControlPanelComponent extends BaseComponent<'section'> {
   private value: number;
@@ -12,7 +12,7 @@ export default class ControlPanelComponent extends BaseComponent<'section'> {
   private valueControl: ControlComponent;
   private animateControl: ControlComponent;
   private hideControl: ControlComponent;
-  private animation!: Animation;
+  private animation!: AnimationService;
 
   constructor(private canvas: CanvasComponent) {
     super({ tag: 'section', classes: [styles.controlPanel] });
@@ -41,7 +41,7 @@ export default class ControlPanelComponent extends BaseComponent<'section'> {
   private renderCircle(): void {
     const angleRadians = (this.value / 100) * 2 * Math.PI - Math.PI / 2;
     this.circle = new ProgressCircle(Canvas.getContext(), 60, 60, 50, angleRadians);
-    this.animation = new Animation(this.circle, 0.01);
+    this.animation = new AnimationService(this.circle, 0.01);
   }
 
   private updateCircle(): void {
