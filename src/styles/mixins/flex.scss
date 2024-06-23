@@ -1,1 +1,30 @@
-// flex mixins
+@mixin flex($gap: null) {
+  display: flex;
+  gap: $gap;
+}
+
+@mixin flex-center($gap: null) {
+  @include flex($gap);
+
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between($gap: null) {
+  @include flex($gap);
+
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-center-column($gap: null) {
+  @include flex-center($gap);
+
+  flex-direction: column;
+}
+
+@mixin flex-between-column($gap: null) {
+  @include flex-between($gap);
+
+  flex-direction: column;
+}

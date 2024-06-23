@@ -1,33 +1,9 @@
+import styles from './_progressBlockView.module.scss';
 import BaseComponent from '@components/baseComponent/baseComponent';
 import { div, h1, input, label } from '@components/tags';
 import { ProgressCircle } from '../progressCircle/progressCircle';
 import { AnimationService } from '../services/animationService';
 import Canvas from '../canvasComponent/canvasComponent';
-
-// const PROGRESS_BLOCK_OPTIONS = {
-//   header: {
-//     h1: 'Progress',
-//   },
-//   valueInput: {
-//     label: 'Value',
-//     attributes: {
-//       type: 'text',
-//       id: 'value',
-//     },
-//   },
-//   animateToggle: {
-//     label: 'Animate',
-//     attributes: {
-//       id: 'animate',
-//     },
-//   },
-//   hideToggle: {
-//     label: 'Hide',
-//     attributes: {
-//       id: 'hide',
-//     },
-//   },
-// };
 
 export class ProgressBlockView extends BaseComponent<'section'> {
   private valueInput: BaseComponent<'input'>;
@@ -36,19 +12,22 @@ export class ProgressBlockView extends BaseComponent<'section'> {
   private progressCircle!: ProgressCircle;
   private animation!: AnimationService;
   constructor(value: number) {
-    super({ tag: 'section', classes: ['progress-block'] });
-    this.valueInput = input(['input', 'input-text'], { type: 'text', id: 'value', value: `${value}` });
-    this.animateToggle = input(['input', 'input-toggle'], { type: 'checkbox', id: 'animate' });
-    this.hideToggle = input(['input', 'input-toggle'], { type: 'checkbox', id: 'hide' });
+    super({ tag: 'section', classes: [styles.progressBlock] });
+    this.valueInput = input([styles.input, styles.inputText], { type: 'text', id: 'value', value: `${value}` });
+    this.animateToggle = input([styles.input, styles.inputToggle], { type: 'checkbox', id: 'animate' });
+    this.hideToggle = input([styles.input, styles.inputToggle], { type: 'checkbox', id: 'hide' });
     this.renderCircle(value);
     this.renderComponent();
   }
 
-  renderComponent(): void {
+  private renderComponent(): void {
     const header = this.renderHeader('Progress');
-    const circleWrapper = div(['circle-wrapper']);
-    circleWrapper.append([Canvas.getElement()]);
-    const controlsWrapper = div(['controls-wrapper']);
+    const circleWrapper = div([styles.wrapper]);
+    const canvasWrapper = div([styles.canvasWrapper]);
+    canvasWrapper.append([Canvas.getElement()]);
+    circleWrapper.append([header.getElement(), canvasWrapper.getElement()]);
+
+    const controlsWrapper = div([styles.wrapper]);
     const valueInputGroup = this.renderInputGroup(this.valueInput, 'Value', 'value');
     const animateToggleGroup = this.renderInputGroup(this.animateToggle, 'Animate', 'animate');
     const hideToggleGroup = this.renderInputGroup(this.hideToggle, 'Hide', 'hide');
@@ -58,25 +37,25 @@ export class ProgressBlockView extends BaseComponent<'section'> {
       hideToggleGroup.getElement(),
     ]);
 
-    this.append([header.getElement(), circleWrapper.getElement(), controlsWrapper.getElement()]);
+    this.append([circleWrapper.getElement(), controlsWrapper.getElement()]);
   }
 
-  renderHeader(headerText: string): BaseComponent<'header'> {
-    const header = new BaseComponent<'header'>({ tag: 'header', classes: ['header'] });
-    const headline = h1(['title'], headerText);
+  private renderHeader(headerText: string): BaseComponent<'header'> {
+    const header = new BaseComponent<'header'>({ tag: 'header', classes: [styles.header] });
+    const headline = h1([styles.title], headerText);
     header.append([headline.getElement()]);
     return header;
   }
 
-  renderCircle(value: number) {
+  private renderCircle(value: number) {
     const angleRadians = (value / 100) * 2 * Math.PI - Math.PI / 2;
-    this.progressCircle = new ProgressCircle(Canvas.getContext(), 60, 60, 50, angleRadians);
+    this.progressCircle = new ProgressCircle(Canvas.getContext(), 65, 65, 55, angleRadians);
     this.animation = new AnimationService(this.progressCircle, 0.01);
   }
 
-  renderInputGroup(input: BaseComponent<'input'>, labelContent: string, id: string): BaseComponent<'div'> {
-    const wrapper = div(['input-group-wrapper']);
-    const inputLabel = label(['input-label'], labelContent, { id });
+  private renderInputGroup(input: BaseComponent<'input'>, labelContent: string, id: string): BaseComponent<'div'> {
+    const wrapper = div([styles.inputGroup]);
+    const inputLabel = label([styles.inputLabel], labelContent, { for: id });
     wrapper.append([inputLabel.getElement(), input.getElement()]);
     return wrapper;
   }
