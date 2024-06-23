@@ -70,8 +70,6 @@
   cursor: pointer;
 
   position: relative;
-
-  appearance: none;
   appearance: none;
   background-color: $color-bg-grey;
   outline: none;
@@ -111,4 +109,8 @@
   @include font-body-default;
 
   cursor: pointer;
+}
+
+.hide {
+  display: none;
 }

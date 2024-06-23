@@ -14,7 +14,10 @@ export class ProgressBlockView extends BaseComponent<'section'> {
   constructor(value: number) {
     super({ tag: 'section', classes: [styles.progressBlock] });
     this.valueInput = input([styles.input, styles.inputText], { type: 'text', id: 'value', value: `${value}` });
-    this.animateToggle = input([styles.input, styles.inputToggle], { type: 'checkbox', id: 'animate' });
+    this.animateToggle = input([styles.input, styles.inputToggle, 'input-toggle-hide'], {
+      type: 'checkbox',
+      id: 'animate',
+    });
     this.hideToggle = input([styles.input, styles.inputToggle], { type: 'checkbox', id: 'hide' });
     this.renderCircle(value);
     this.renderComponent();
@@ -66,23 +69,65 @@ export class ProgressBlockView extends BaseComponent<'section'> {
   }
 
   private updateHideToggle(isHidden: boolean): void {
-    this.hideToggle.setAttributes({ checked: `${isHidden}` });
+    if (isHidden) {
+      this.hideToggle.setAttributes({ checked: 'true' });
+    } else {
+      this.hideToggle.removeAttribute('checked');
+    }
   }
 
   private updateAnimateToggle(isAnimated: boolean): void {
-    this.animateToggle.setAttributes({ checked: `${isAnimated}` });
+    if (isAnimated) {
+      this.animateToggle.setAttributes({ checked: 'true' });
+    } else {
+      this.animateToggle.removeAttribute('checked');
+    }
+  }
+
+  private updateVisibility(isHidden: boolean) {
+    if (isHidden) {
+      this.addStyles([styles.hide]);
+    } else {
+      this.removeStyles([styles.hide]);
+    }
+  }
+
+  private updateAnimationState(isAnimated: boolean): void {
+    if (isAnimated) {
+      this.animation.start();
+    } else {
+      this.animation.stop();
+    }
   }
 
   update(value: number, isAnimated: boolean, isHidden: boolean): void {
-    this.updateCircle(value);
+    this.updateVisibility(isHidden);
     this.updateHideToggle(isHidden);
+    this.updateCircle(value);
     this.updateAnimateToggle(isAnimated);
+    this.updateAnimationState(isAnimated);
   }
 
   bindValueInputChange(onChange: (value: string) => void): void {
     this.valueInput.addListener('input', (e) => {
       if (e.target && e.target instanceof HTMLInputElement) {
         onChange(e.target.value);
+      }
+    });
+  }
+
+  bindHideToggleChange(onChange: (isChecked: boolean) => void): void {
+    this.hideToggle.addListener('change', (e) => {
+      if (e.target && e.target instanceof HTMLInputElement) {
+        onChange(e.target.checked);
+      }
+    });
+  }
+
+  bindAnimateToggleChange(onChange: (isChecked: boolean) => void): void {
+    this.animateToggle.addListener('change', (e) => {
+      if (e.target && e.target instanceof HTMLInputElement) {
+        onChange(e.target.checked);
       }
     });
   }

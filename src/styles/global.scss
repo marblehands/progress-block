@@ -13,7 +13,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizelegibility;
 
-  color-scheme: light dark;
+  color-scheme: light;
   background-color: $color-bg-light;
 
   font-synthesis: none;
@@ -35,15 +35,4 @@ body {
   width: 100%;
   height: 100dvh;
   padding: 20px;
-}
-
-.hide {
-  display: none;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: $color-text-dark;
-    background-color: $color-bg-light;
-  }
 }
