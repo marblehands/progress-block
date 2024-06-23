@@ -60,5 +60,30 @@ export class ProgressBlockView extends BaseComponent<'section'> {
     return wrapper;
   }
 
-  // update({ value, isAnimated, isHidden }: ProgressBlockModel): void {}
+  private updateCircle(value: number): void {
+    const angleRadians = (value / 100) * 2 * Math.PI;
+    this.progressCircle.updateArcWIdth(angleRadians);
+  }
+
+  private updateHideToggle(isHidden: boolean): void {
+    this.hideToggle.setAttributes({ checked: `${isHidden}` });
+  }
+
+  private updateAnimateToggle(isAnimated: boolean): void {
+    this.animateToggle.setAttributes({ checked: `${isAnimated}` });
+  }
+
+  update(value: number, isAnimated: boolean, isHidden: boolean): void {
+    this.updateCircle(value);
+    this.updateHideToggle(isHidden);
+    this.updateAnimateToggle(isAnimated);
+  }
+
+  bindValueInputChange(onChange: (value: string) => void): void {
+    this.valueInput.addListener('input', (e) => {
+      if (e.target && e.target instanceof HTMLInputElement) {
+        onChange(e.target.value);
+      }
+    });
+  }
 }
