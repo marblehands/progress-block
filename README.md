@@ -12,7 +12,7 @@ The Progress Block project is a prototype designed for use in mobile web applica
   - **Normal**: The basic state where the size of the arc reflects a parameter or process progress. The start of the arc corresponds to 12 o'clock, and the end of the arc moves clockwise to the start position when the value reaches 100.
   - **Animated**: An independent state where the block or its elements start rotating with a certain period in the clockwise direction.
   - **Hidden**: A state that hides the block from the page.
-- **Adaptive to screen orientation**: The application adapts to the landscape orientation for screen resolutions less than 1024px.
+- **Adaptive to Screen Orientation**: The application adapts to the landscape orientation for screen resolutions less than 1024px. The Pixel Perfect extension was used to control layout consistency at resolutions of 320px/568px according to the design mockups provided.
 
 ## Technologies Used
 
