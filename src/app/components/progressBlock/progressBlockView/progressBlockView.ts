@@ -1,16 +1,21 @@
+import BaseComponent from '../../baseComponent/baseComponent';
+import { div, h1, input, label } from '../../tags';
 import styles from './_progressBlockView.module.scss';
-import BaseComponent from '@components/baseComponent/baseComponent';
-import { div, h1, input, label } from '@components/tags';
 import { ProgressCircle } from './progressCircle/progressCircle';
 import { AnimationService } from '../services/animationService';
 import Canvas from './canvasComponent/canvasComponent';
 
 export class ProgressBlockView extends BaseComponent<'section'> {
   private valueInput: BaseComponent<'input'>;
+
   private animateToggle: BaseComponent<'input'>;
+
   private hideToggle: BaseComponent<'input'>;
+
   private progressCircle!: ProgressCircle;
+
   private animation!: AnimationService;
+
   constructor(value: number) {
     super({ tag: 'section', classes: [styles.progressBlock] });
     this.valueInput = input([styles.input, styles.inputText], { type: 'text', id: 'value', value: `${value}` });
@@ -24,16 +29,19 @@ export class ProgressBlockView extends BaseComponent<'section'> {
   }
 
   private renderComponent(): void {
-    const header = this.renderHeader('Progress');
+    const header = new BaseComponent<'header'>({ tag: 'header', classes: [styles.header] });
+    const headline = h1([styles.title], 'Progress');
+    header.append([headline.getElement()]);
+
     const circleWrapper = div([styles.wrapper]);
     const canvasWrapper = div([styles.canvasWrapper]);
     canvasWrapper.append([Canvas.getElement()]);
     circleWrapper.append([header.getElement(), canvasWrapper.getElement()]);
 
     const controlsWrapper = div([styles.wrapper]);
-    const valueInputGroup = this.renderInputGroup(this.valueInput, 'Value', 'value');
-    const animateToggleGroup = this.renderInputGroup(this.animateToggle, 'Animate', 'animate');
-    const hideToggleGroup = this.renderInputGroup(this.hideToggle, 'Hide', 'hide');
+    const valueInputGroup = ProgressBlockView.renderInputGroup(this.valueInput, 'Value', 'value');
+    const animateToggleGroup = ProgressBlockView.renderInputGroup(this.animateToggle, 'Animate', 'animate');
+    const hideToggleGroup = ProgressBlockView.renderInputGroup(this.hideToggle, 'Hide', 'hide');
     controlsWrapper.append([
       valueInputGroup.getElement(),
       animateToggleGroup.getElement(),
@@ -43,29 +51,27 @@ export class ProgressBlockView extends BaseComponent<'section'> {
     this.append([circleWrapper.getElement(), controlsWrapper.getElement()]);
   }
 
-  private renderHeader(headerText: string): BaseComponent<'header'> {
-    const header = new BaseComponent<'header'>({ tag: 'header', classes: [styles.header] });
-    const headline = h1([styles.title], headerText);
-    header.append([headline.getElement()]);
-    return header;
-  }
-
-  private renderCircle(value: number) {
+  private renderCircle(value: number): void {
     const angleRadians = (value / 100) * 2 * Math.PI - Math.PI / 2;
     this.progressCircle = new ProgressCircle(Canvas.getContext(), 65, 65, 55, angleRadians);
     this.animation = new AnimationService(this.progressCircle, 0.01);
   }
 
-  private renderInputGroup(input: BaseComponent<'input'>, labelContent: string, id: string): BaseComponent<'div'> {
+  private static renderInputGroup(
+    inputElement: BaseComponent<'input'>,
+    labelContent: string,
+    id: string,
+  ): BaseComponent<'div'> {
     const wrapper = div([styles.inputGroup]);
     const inputLabel = label([styles.inputLabel], labelContent, { for: id });
-    wrapper.append([inputLabel.getElement(), input.getElement()]);
+    wrapper.append([inputLabel.getElement(), inputElement.getElement()]);
+
     return wrapper;
   }
 
   private updateCircle(value: number): void {
     const angleRadians = (value / 100) * 2 * Math.PI;
-    this.progressCircle.updateArcWIdth(angleRadians);
+    this.progressCircle.updateArcWidth(angleRadians);
   }
 
   private updateHideToggle(isHidden: boolean): void {
@@ -84,7 +90,7 @@ export class ProgressBlockView extends BaseComponent<'section'> {
     }
   }
 
-  private updateVisibility(isHidden: boolean) {
+  private updateVisibility(isHidden: boolean): void {
     if (isHidden) {
       this.addStyles([styles.hide]);
     } else {
@@ -100,7 +106,7 @@ export class ProgressBlockView extends BaseComponent<'section'> {
     }
   }
 
-  update(value: number, isAnimated: boolean, isHidden: boolean): void {
+  public update(value: number, isAnimated: boolean, isHidden: boolean): void {
     this.updateVisibility(isHidden);
     this.updateHideToggle(isHidden);
     this.updateCircle(value);
@@ -108,7 +114,7 @@ export class ProgressBlockView extends BaseComponent<'section'> {
     this.updateAnimationState(isAnimated);
   }
 
-  bindValueInputChange(onChange: (value: string) => void): void {
+  public bindValueInputChange(onChange: (value: string) => void): void {
     this.valueInput.addListener('input', (e) => {
       if (e.target && e.target instanceof HTMLInputElement) {
         onChange(e.target.value);
@@ -116,7 +122,7 @@ export class ProgressBlockView extends BaseComponent<'section'> {
     });
   }
 
-  bindHideToggleChange(onChange: (isChecked: boolean) => void): void {
+  public bindHideToggleChange(onChange: (isChecked: boolean) => void): void {
     this.hideToggle.addListener('change', (e) => {
       if (e.target && e.target instanceof HTMLInputElement) {
         onChange(e.target.checked);
@@ -124,7 +130,7 @@ export class ProgressBlockView extends BaseComponent<'section'> {
     });
   }
 
-  bindAnimateToggleChange(onChange: (isChecked: boolean) => void): void {
+  public bindAnimateToggleChange(onChange: (isChecked: boolean) => void): void {
     this.animateToggle.addListener('change', (e) => {
       if (e.target && e.target instanceof HTMLInputElement) {
         onChange(e.target.checked);

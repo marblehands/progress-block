@@ -1,7 +1,10 @@
 export class ProgressCircle {
   private lineWidth: number;
+
   private startAngle: number;
+
   private color: string;
+
   constructor(
     private context: CanvasRenderingContext2D,
     private x: number,
@@ -16,7 +19,7 @@ export class ProgressCircle {
     this.draw();
   }
 
-  draw() {
+  public draw(): void {
     this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
 
     this.context.beginPath();
@@ -34,13 +37,13 @@ export class ProgressCircle {
     this.context.closePath();
   }
 
-  update(step: number) {
-    this.startAngle = this.startAngle + Math.PI * 2 * step;
-    this.endAngle = this.endAngle + Math.PI * 2 * step;
+  public update(step: number): void {
+    this.startAngle += Math.PI * 2 * step;
+    this.endAngle += Math.PI * 2 * step;
     this.draw();
   }
 
-  updateArcWIdth(value: number) {
+  public updateArcWidth(value: number): void {
     const currentArcWidth = this.endAngle - this.startAngle;
     const diff = value - currentArcWidth;
     this.endAngle += diff;

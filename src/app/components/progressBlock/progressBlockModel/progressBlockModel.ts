@@ -5,27 +5,27 @@ export class ProgressBlockModel {
     private isHidden: boolean = false,
   ) {}
 
-  getValue(): number {
+  public getValue(): number {
     return this.value;
   }
 
-  setValue(newValue: number): void {
+  public setValue(newValue: number): void {
     this.value = newValue;
   }
 
-  getIsHidden(): boolean {
+  public getIsHidden(): boolean {
     return this.isHidden;
   }
 
-  setIsHidden(isHidden: boolean): void {
+  public setIsHidden(isHidden: boolean): void {
     this.isHidden = isHidden;
   }
 
-  getIsAnimated(): boolean {
+  public getIsAnimated(): boolean {
     return this.isAnimated;
   }
 
-  setIsAnimated(isAnimated: boolean): void {
+  public setIsAnimated(isAnimated: boolean): void {
     this.isAnimated = isAnimated;
   }
 }

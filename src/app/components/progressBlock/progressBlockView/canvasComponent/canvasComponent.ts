@@ -1,5 +1,5 @@
+import BaseComponent from '../../../baseComponent/baseComponent';
 import styles from './_canvas.module.scss';
-import BaseComponent from '@components/baseComponent/baseComponent';
 
 export class CanvasComponent extends BaseComponent<'canvas'> {
   private context: CanvasRenderingContext2D;
@@ -9,7 +9,7 @@ export class CanvasComponent extends BaseComponent<'canvas'> {
     this.context = this.getElement().getContext('2d') as CanvasRenderingContext2D;
   }
 
-  getContext(): CanvasRenderingContext2D {
+  public getContext(): CanvasRenderingContext2D {
     return this.context;
   }
 }

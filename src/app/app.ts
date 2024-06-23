@@ -1,10 +1,10 @@
-import progressBlock from '@components/progressBlock/progressBlock';
+import progressBlock from './components/progressBlock/progressBlock';
 
 class App {
-  constructor(private progressBlock: HTMLElement) {}
+  constructor(private progressBlockComponent: HTMLElement) {}
 
   public createApp(rootElement: HTMLElement): void {
-    rootElement.append(this.progressBlock);
+    rootElement.append(this.progressBlockComponent);
   }
 }
 

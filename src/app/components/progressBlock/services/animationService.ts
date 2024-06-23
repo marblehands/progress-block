@@ -1,8 +1,10 @@
-import { ProgressCircle } from '../progressBlockView/progressCircle/progressCircle';
+import type { ProgressCircle } from '../progressBlockView/progressCircle/progressCircle';
 
 export class AnimationService {
   private circle: ProgressCircle;
+
   private speed: number;
+
   private animationId: number | null;
 
   constructor(circle: ProgressCircle, speed: number = 0.01) {
@@ -11,20 +13,20 @@ export class AnimationService {
     this.animationId = null;
   }
 
-  start() {
+  public start(): void {
     if (this.animationId === null) {
       this.animate();
     }
   }
 
-  stop() {
+  public stop(): void {
     if (this.animationId !== null) {
       cancelAnimationFrame(this.animationId);
       this.animationId = null;
     }
   }
 
-  private animate() {
+  private animate(): void {
     this.circle.update(this.speed);
     this.animationId = requestAnimationFrame(this.animate.bind(this));
   }

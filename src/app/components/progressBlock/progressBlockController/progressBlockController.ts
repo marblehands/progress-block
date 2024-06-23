@@ -1,5 +1,5 @@
-import { ProgressBlockModel } from '../progressBlockModel/progressBlockModel';
-import { ProgressBlockView } from '../progressBlockView/progressBlockView';
+import type { ProgressBlockModel } from '../progressBlockModel/progressBlockModel';
+import type { ProgressBlockView } from '../progressBlockView/progressBlockView';
 
 export class ProgressBlockController {
   constructor(
@@ -15,6 +15,7 @@ export class ProgressBlockController {
 
   private valueInputOnChange(value: string): void {
     const numValue = Number(value);
+
     if (value.trim() && !Number.isNaN(numValue) && numValue >= 0 && numValue <= 100) {
       this.setValue(numValue);
     }
@@ -26,22 +27,23 @@ export class ProgressBlockController {
 
   private animateToggleOnChange(isChecked: boolean): void {
     const value = this.model.getValue();
+
     if (!Number.isNaN(value) && value >= 0 && value <= 100) {
       this.setIsAnimated(isChecked);
     }
   }
 
-  setValue(value: number): void {
+  public setValue(value: number): void {
     this.model.setValue(value);
     this.updateView();
   }
 
-  setIsAnimated(isAnimated: boolean): void {
+  public setIsAnimated(isAnimated: boolean): void {
     this.model.setIsAnimated(isAnimated);
     this.updateView();
   }
 
-  setIsHidden(isHidden: boolean): void {
+  public setIsHidden(isHidden: boolean): void {
     this.model.setIsHidden(isHidden);
     this.updateView();
   }
