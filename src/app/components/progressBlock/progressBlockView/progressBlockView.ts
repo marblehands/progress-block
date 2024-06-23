@@ -1,5 +1,5 @@
 import BaseComponent from '@components/baseComponent/baseComponent';
-import { div, input, label } from '@components/tags';
+import { div, h1, input, label } from '@components/tags';
 import { ProgressBlockModel } from '../progressBlockModel/progressBlockModel';
 import { ProgressCircle } from '../progressCircle/progressCircle';
 import { AnimationService } from '../services/animationService';
@@ -37,24 +37,36 @@ export class ProgressBlockView extends BaseComponent<'section'> {
   private progressCircle!: ProgressCircle;
   private animation!: AnimationService;
   constructor(value: number) {
-    super({ tag: 'section' });
-    this.valueInput = input(['input'], { type: 'text', id: 'value', value: `${value}` });
-    this.animateToggle = input(['input'], { type: 'checkbox', id: 'animate' });
-    this.hideToggle = input(['input'], { type: 'checkbox', id: 'hide' });
+    super({ tag: 'section', classes: ['progress-block'] });
+    this.valueInput = input(['input', 'input-text'], { type: 'text', id: 'value', value: `${value}` });
+    this.animateToggle = input(['input', 'input-toggle'], { type: 'checkbox', id: 'animate' });
+    this.hideToggle = input(['input', 'input-toggle'], { type: 'checkbox', id: 'hide' });
     this.renderCircle(value);
     this.renderComponent();
   }
 
   renderComponent(): void {
+    const header = this.renderHeader('Progress');
+    const circleWrapper = div(['circle-wrapper']);
+    circleWrapper.append([Canvas.getElement()]);
+    const controlsWrapper = div(['controls-wrapper']);
     const valueInputGroup = this.renderInputGroup(this.valueInput, 'Value', 'value');
     const animateToggleGroup = this.renderInputGroup(this.animateToggle, 'Animate', 'animate');
     const hideToggleGroup = this.renderInputGroup(this.hideToggle, 'Hide', 'hide');
-    this.append([
-      Canvas.getElement(),
+    controlsWrapper.append([
       valueInputGroup.getElement(),
       animateToggleGroup.getElement(),
       hideToggleGroup.getElement(),
     ]);
+
+    this.append([header.getElement(), circleWrapper.getElement(), controlsWrapper.getElement()]);
+  }
+
+  renderHeader(headerText: string): BaseComponent<'header'> {
+    const header = new BaseComponent<'header'>({ tag: 'header', classes: ['header'] });
+    const headline = h1(['title'], headerText);
+    header.append([headline.getElement()]);
+    return header;
   }
 
   renderCircle(value: number) {
@@ -64,7 +76,7 @@ export class ProgressBlockView extends BaseComponent<'section'> {
   }
 
   renderInputGroup(input: BaseComponent<'input'>, labelContent: string, id: string): BaseComponent<'div'> {
-    const wrapper = div(['input-group']);
+    const wrapper = div(['input-group-wrapper']);
     const inputLabel = label(['input-label'], labelContent, { id });
     wrapper.append([inputLabel.getElement(), input.getElement()]);
     return wrapper;
