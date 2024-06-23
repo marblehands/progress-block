@@ -2,13 +2,13 @@ import ControlComponent from '@components/progressBlock/controlComponent/control
 import { input, label } from '@components/tags';
 
 type ValueChangeCallback = (value: number) => void;
-type HideCheckboxChangeCallback = (isChecked: boolean) => void;
+type CheckboxChangeCallback = (isChecked: boolean) => void;
 
 export function createControlComponent(
   option: { label: string; id: string; value?: number },
   type: 'text' | 'checkbox',
   valueControlOnChangeCallback?: ValueChangeCallback,
-  hideControlOnChangeCallback?: HideCheckboxChangeCallback,
+  ControlOnChangeCallback?: CheckboxChangeCallback,
 ) {
   const labelElement = label(['label'], option.label, { for: option.id });
   const inputProps: { type: 'text' | 'checkbox'; id: string; value?: string } = { type, id: option.id };
@@ -28,11 +28,11 @@ export function createControlComponent(
     });
   }
 
-  if (type === 'checkbox' && hideControlOnChangeCallback) {
+  if (type === 'checkbox' && ControlOnChangeCallback) {
     inputElement.addListener('change', (event) => {
       const target = event.target as HTMLInputElement;
       const isChecked = target.checked;
-      hideControlOnChangeCallback(isChecked);
+      ControlOnChangeCallback(isChecked);
     });
   }
 

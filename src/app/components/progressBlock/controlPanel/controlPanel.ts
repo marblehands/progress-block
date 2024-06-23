@@ -2,11 +2,14 @@ import BaseComponent from '@components/baseComponent/baseComponent';
 import ControlComponent from '../controlComponent/controlComponent';
 import styles from './_controlPanel.module.scss';
 import Canvas, { CanvasComponent } from '../canvasComponent/canvasComponent';
-import { DrawCircleService } from '../progressCircle/progressCircle';
+import { ProgressCircle } from '../progressCircle/progressCircle';
 import { createControlComponent } from '@utils/utils';
+import { Animation } from '../progressCircle/animationService';
 
 export default class ControlPanelComponent extends BaseComponent<'section'> {
   private value: number;
+
+  private circle!: ProgressCircle;
   private valueControl: ControlComponent;
   private animateControl: ControlComponent;
   private hideControl: ControlComponent;
@@ -20,7 +23,12 @@ export default class ControlPanelComponent extends BaseComponent<'section'> {
       'text',
       this.valueControlOnChange,
     );
-    this.animateControl = createControlComponent({ label: 'Animate', id: 'animate' }, 'checkbox');
+    this.animateControl = createControlComponent(
+      { label: 'Animate', id: 'animate' },
+      'checkbox',
+      undefined,
+      this.animateControlOnChange,
+    );
     this.hideControl = createControlComponent(
       { label: 'Hide', id: 'hide' },
       'checkbox',
@@ -34,7 +42,7 @@ export default class ControlPanelComponent extends BaseComponent<'section'> {
   private renderCircle(): void {
     const angleRadians = (this.value / 100) * 2 * Math.PI - Math.PI / 2;
     console.log(this.value);
-    new DrawCircleService(Canvas.getContext(), 60, 60, 50, angleRadians);
+    this.circle = new ProgressCircle(Canvas.getContext(), 60, 60, 50, angleRadians);
   }
 
   private renderComponent(): void {
@@ -55,11 +63,22 @@ export default class ControlPanelComponent extends BaseComponent<'section'> {
     this.hide(isChecked);
   };
 
+  private animateControlOnChange = (isChecked: boolean) => {
+    this.animate(isChecked);
+  };
+
   private hide(isChecked: boolean): void {
     if (isChecked) {
       this.addStyles(['hide']);
     } else {
       this.removeStyles(['hide']);
+    }
+  }
+
+  private animate(isChecked: boolean): void {
+    const animation = new Animation(this.circle, 0.01);
+    if (isChecked) {
+      animation.start();
     }
   }
 }

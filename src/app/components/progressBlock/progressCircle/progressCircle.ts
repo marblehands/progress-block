@@ -1,4 +1,4 @@
-export class DrawCircleService {
+export class ProgressCircle {
   private lineWidth: number;
   private startAngle: number;
   private color: string;
@@ -32,5 +32,11 @@ export class DrawCircleService {
     this.context.strokeStyle = this.color;
     this.context.stroke();
     this.context.closePath();
+  }
+
+  update(step: number) {
+    this.startAngle = this.startAngle + Math.PI * 2 * step;
+    this.endAngle = this.endAngle + Math.PI * 2 * step;
+    this.draw();
   }
 }
