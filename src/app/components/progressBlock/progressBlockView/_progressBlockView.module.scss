@@ -70,6 +70,7 @@
   cursor: pointer;
 
   position: relative;
+
   appearance: none;
   background-color: $color-bg-grey;
   outline: none;
@@ -113,4 +114,28 @@
 
 .hide {
   display: none;
+}
+
+@media screen and (device-width <= 1024px) and (aspect-ratio >= 3 / 2) {
+  .progress-block {
+    flex-direction: row;
+  }
+
+  .wrapper {
+    gap: 0;
+    height: 100%;
+  }
+
+  .wrapper:last-child {
+    padding: 0;
+    padding-left: 1.5rem;
+  }
+
+  .wrapper:first-child {
+    padding-bottom: 24px;
+  }
+
+  .canvas-wrapper {
+    padding-left: 2.7rem;
+  }
 }
