@@ -1,3 +1,5 @@
+const ratio = window.devicePixelRatio * 2;
+
 export class ProgressCircle {
   private lineWidth: number;
 
@@ -12,7 +14,7 @@ export class ProgressCircle {
     private radius: number,
     private endAngle: number,
   ) {
-    this.lineWidth = 10;
+    this.lineWidth = 10 * ratio;
     this.startAngle = -Math.PI / 2;
     this.endAngle = endAngle;
     this.color = '#005DFF';

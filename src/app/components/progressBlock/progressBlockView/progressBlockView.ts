@@ -5,6 +5,8 @@ import { ProgressCircle } from './progressCircle/progressCircle';
 import { AnimationService } from '../services/animationService';
 import Canvas from './canvasComponent/canvasComponent';
 
+const ratio = window.devicePixelRatio * 2;
+
 export class ProgressBlockView extends BaseComponent<'section'> {
   private valueInput: BaseComponent<'input'>;
 
@@ -53,7 +55,7 @@ export class ProgressBlockView extends BaseComponent<'section'> {
 
   private renderCircle(value: number): void {
     const angleRadians = (value / 100) * 2 * Math.PI - Math.PI / 2;
-    this.progressCircle = new ProgressCircle(Canvas.getContext(), 65, 65, 55, angleRadians);
+    this.progressCircle = new ProgressCircle(Canvas.getContext(), 65 * ratio, 65 * ratio, 55 * ratio, angleRadians);
     this.animation = new AnimationService(this.progressCircle, 0.01);
   }
 
