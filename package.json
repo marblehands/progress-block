@@ -1,0 +1,44 @@
+{
+  "name": "progress-block",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint --ext ts --fix .",
+    "prepare": "node .husky/install.mjs",
+    "format": "prettier --write .",
+    "ci:format": "prettier --check ."
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@stylistic/eslint-plugin-ts": "^2.2.2",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "@typescript-eslint/parser": "^7.13.1",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "prettier": "3.3.2",
+    "sass": "^1.77.6",
+    "stylelint": "^16.6.1",
+    "stylelint-config-clean-order": "^6.0.0",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "stylelint-order": "^6.0.4",
+    "stylelint-prettier": "^5.0.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.3.1",
+    "vite-tsconfig-paths": "^4.3.2"
+  },
+  "dependencies": {
+    "normalize-scss": "^8.0.0"
+  }
+}

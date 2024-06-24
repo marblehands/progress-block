@@ -1,0 +1,141 @@
+@import '../../../../styles/mixins/flex';
+@import '../../../../styles/mixins/grid';
+@import '../../../../styles/mixins/typography';
+@import '../../../../styles/variables';
+
+.progress-block {
+  @include flex-between-column(1rem);
+
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper {
+  @include flex-center-column(1rem);
+
+  flex-basis: 50%;
+  width: 100%;
+}
+
+.wrapper:last-child {
+  gap: 0.8rem;
+  align-items: flex-start;
+  padding-bottom: 5.7rem;
+  padding-left: calc(50% - 44px - 26px);
+}
+
+.canvas-wrapper {
+  @include grid-center;
+
+  flex: 1 auto;
+}
+
+.header {
+  width: 100%;
+}
+
+.title {
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.input-group {
+  @include flex-center(22px);
+
+  flex-direction: row-reverse;
+}
+
+.input {
+  width: 44px;
+  height: 28px;
+  border-radius: 22px;
+}
+
+.input-text {
+  @include font-body-default;
+
+  font-size: 0.9rem;
+  text-align: center;
+  background-color: transparent;
+  border: 1px solid #1e1e1e;
+}
+
+.input-text:focus,
+.input-text:focus-visible {
+  outline: 2px auto $color-accent;
+}
+
+.input-toggle {
+  cursor: pointer;
+
+  position: relative;
+
+  appearance: none;
+  background-color: $color-bg-grey;
+  outline: none;
+
+  transition: background-color 0.3s ease;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    right: auto;
+    left: 2px;
+    transform: translateY(-50%);
+
+    display: block;
+
+    width: 24px;
+    height: 24px;
+
+    background-color: $color-bg-light;
+    border-radius: 50%;
+
+    transition: left 0.3s ease;
+  }
+
+  &:checked {
+    background-color: $color-accent;
+  }
+
+  &:checked::before {
+    left: 18px;
+  }
+}
+
+.input-label {
+  @include font-body-default;
+
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
+
+@media screen and (device-width <= 1024px) and (aspect-ratio >= 3 / 2) {
+  .progress-block {
+    flex-direction: row;
+  }
+
+  .wrapper {
+    gap: 0;
+    height: 100%;
+  }
+
+  .wrapper:last-child {
+    padding: 0;
+    padding-left: 1.5rem;
+  }
+
+  .wrapper:first-child {
+    padding-bottom: 24px;
+  }
+
+  .canvas-wrapper {
+    padding-left: 2.7rem;
+  }
+}

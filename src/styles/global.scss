@@ -1,0 +1,38 @@
+@import './variables';
+@import './fonts';
+@import './mixins/grid';
+@import './mixins/typography';
+@import 'node_modules/normalize-scss/sass/normalize';
+
+@include normalize;
+
+:root {
+  @include font-body-default;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizelegibility;
+
+  color-scheme: light;
+  background-color: $color-bg-light;
+
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  @include grid-center;
+
+  min-width: 320px;
+  min-height: 100dvh;
+  margin: 0;
+}
+
+#app {
+  width: 100%;
+  height: 100dvh;
+  padding: 20px;
+}

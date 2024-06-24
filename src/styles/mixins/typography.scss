@@ -1,0 +1,8 @@
+@import '../variables';
+
+@mixin font-body-default {
+  font:
+    600 1rem/1.5 Nunito,
+    sans-serif;
+  color: $color-text-dark;
+}
